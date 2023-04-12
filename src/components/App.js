@@ -1,11 +1,14 @@
 import React, { Component } from 'react';
 import Web3 from 'web3';
-import logo from '../logo.png';
 import Main from './Main'
-// import './App.css';
-import '../input.css';
 import Navbar from'./Navbar.js';
 import Marketplace from '../abis/Marketplace.json';
+import Footer from './Footer.js'
+import Services from './Services.js'
+import Transactions from './Transactions.js'
+import Loader from './Loader.js'
+import Welcome from './Welcome.js'
+import './App.css';
 
 class App extends Component {
 
@@ -89,10 +92,32 @@ class App extends Component {
   render() {
     return (
       <div>
-         <h1 class="text-7xl font-bold underline">
-    Hello world!
-  </h1>
-      
+    <div className= "min-h-screen">
+    <div className="gradient-bg-welcome">
+     <Navbar/>
+      <Welcome/> 
+    </div>
+    {/* <Services/> */}
+     {/* <Transactions/> */}
+     {/* <Footer/> */}
+   </div>
+        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
+        {/* <Navbar accountNumber = {this.state.account}/> */}
+          <a
+            className="navbar-brand col-sm-3 col-md-2 mr-0"
+            href="http://www.dappuniversity.com/bootcamp"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Dapp University
+          </a>
+        </nav>
+        <main role="main" className="col-lg-12 d-flex">
+  { this.state.loading
+    ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
+    : <Main products={this.state.products} createProduct={this.createProduct} purchaseProduct={this.purchaseProduct}/>
+  }
+</main>
       </div>
     );
   }
