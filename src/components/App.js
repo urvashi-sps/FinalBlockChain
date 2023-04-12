@@ -95,7 +95,7 @@ class App extends Component {
     <div className= "min-h-screen">
     <div className="gradient-bg-welcome">
      <Navbar/>
-      <Welcome/> 
+      <Welcome accountNumber = {this.state.account}/> 
     </div>
     {/* <Services/> */}
      {/* <Transactions/> */}
