@@ -95,23 +95,12 @@ class App extends Component {
     <div className= "min-h-screen">
     <div className="gradient-bg-welcome">
      <Navbar/>
-      <Welcome accountNumber = {this.state.account}/> 
+      <Welcome accountNumber = {this.state.account} createProduct={this.createProduct} /> 
     </div>
-    {/* <Services/> */}
+    <Services/>
      {/* <Transactions/> */}
-     {/* <Footer/> */}
+     <Footer/>
    </div>
-        <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        {/* <Navbar accountNumber = {this.state.account}/> */}
-          <a
-            className="navbar-brand col-sm-3 col-md-2 mr-0"
-            href="http://www.dappuniversity.com/bootcamp"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Dapp University
-          </a>
-        </nav>
         <main role="main" className="col-lg-12 d-flex">
   { this.state.loading
     ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
