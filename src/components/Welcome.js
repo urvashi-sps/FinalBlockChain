@@ -18,18 +18,18 @@ const Input = ({placeholder,name,type,value,handleChange})=>(
 
 
 const Welcome = (props) => {
-    console.log("props.connected",props);
     const [formData, setformData] = useState({ ProductName: "", amount: "" });
     const handleChange = (e, name) => {
         e.persist();
          setformData((prevState) => ({ ...prevState, [name]: e.target.value }));
       };
-        const handleSubmit = (e) => {
+        const  handleSubmit = (e) => {
             const { ProductName,amount} = formData;
             if (!ProductName || !amount) return;
             const price = window.web3.utils.toWei(amount.toString(), 'Ether')
             e.preventDefault();
-            props.createProduct(ProductName, price)
+            props.createProduct(ProductName, price);
+             props.connectWallet();
           };
     
     return (

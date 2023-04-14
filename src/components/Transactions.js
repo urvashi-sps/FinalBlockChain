@@ -66,9 +66,10 @@ id = id.toString();
 };
 
 const Transactions = (props) => {
-   const c = props.products.map((x)=>{return {id:x.id,name:x.name,
+   let c = props.products.map((x)=>{return {id:x.id,name:x.name,
      price:window.web3.utils.fromWei(x.price.toString(),'Ether'),
     owner:x.owner,purchased:x.purchased}});
+     c= c.slice(-3);
    
   return (
     <div className="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions">

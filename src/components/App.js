@@ -32,8 +32,8 @@ class App extends Component {
 
   async loadBlockChainData(){
     const web3= window.web3
-    // const accounts =await web3.eth.getAccounts()
-    // this.setState({ account: accounts[0] })
+    const accounts =await web3.eth.getAccounts()
+    this.setState({ account: accounts[0] })
     const networkId = await web3.eth.net.getId();
     console.log("Network Id",networkId);
     const networkData = Marketplace.networks[networkId];
@@ -67,13 +67,26 @@ class App extends Component {
           productCount: 0,
           products: [],
           loading: true,
-          connected:false
+          connected:true
         }
         this.createProduct = this.createProduct.bind(this);
         this.purchaseProduct = this.purchaseProduct.bind(this);
         this.connectWallet=this.connectWallet.bind(this)
    }
-   
+
+   async connectWallet() {
+    const web3= window.web3
+    const accounts =await web3.eth.getAccounts()
+    this.setState({ account: accounts[0] })
+    this.setState({connected:true})
+  }
+
+  async refresh (){
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    await delay(10000);
+    window.location.reload();
+  }
+
    async createProduct(name, price) {
     this.setState({ loading: true })
      this.state.marketplace.methods.createProduct(name, price).send({ from: this.state.account})
@@ -81,18 +94,9 @@ class App extends Component {
       console.log("***********************",transactionhash)
       this.setState({ loading: false })
     })
-    const delay = ms => new Promise(res => setTimeout(res, ms));
-    await delay(10000);
-    window.location.reload();
+   this.refresh();
   }
 
-  async connectWallet() {
-    const web3= window.web3
-    const accounts =await web3.eth.getAccounts()
-    this.setState({ account: accounts[0] })
-    this.setState({connected:true})
-    console.log("@@@@@@@",this.state);
-  }
 
   purchaseProduct(id, price) {
     this.setState({ loading: true })
@@ -101,6 +105,7 @@ class App extends Component {
       console.log("receipt",receipt);
       this.setState({ loading: false })
     })
+    this.refresh();
   }
    
   render() {
