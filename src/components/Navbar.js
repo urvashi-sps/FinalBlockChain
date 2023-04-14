@@ -19,7 +19,7 @@ const Navbar =()=>{
          <img src ={logo} alt ="logo" className="w-32 cursor-pointer "/>
          </div>
          <ul className='text-white md:flex hidden list-none flex-row justify-between items-center flex-initial'>
-            {["Market","Exchange","Tutorials","Wallets"].map((item,index)=>(
+            {["Market","Transactions","Tutorials","About"].map((item,index)=>(
                 <NavbarItem key = {item+index} title ={item}/>
              ))}
              <li className='bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]'>
@@ -27,8 +27,8 @@ const Navbar =()=>{
              </li>
          </ul>
          <div className='flex relative'>
-         {/* <AiOutlineClose fontSize={108} className ="text-white md:hidden cursor-pointer"/> */}
-         {/* <HiMenuAlt4 fontSize={108} className ="text-white md:hidden cursor-pointer"/> */}
+         <AiOutlineClose fontSize={108} className ="text-white md:hidden cursor-pointer"/>
+         <HiMenuAlt4 fontSize={108} className ="text-white md:hidden cursor-pointer"/>
          {
             toggleMenu ? <AiOutlineClose fontSize={28} className ="text-white md:hidden cursor-pointer" onClick={()=>setToggleMenu(false)}/>:
             <HiMenuAlt4 fontSize={28} className ="text-white md:hidden cursor-pointer" onClick={()=>setToggleMenu(true)}/> 
@@ -40,7 +40,7 @@ const Navbar =()=>{
                      <AiOutlineClose onClick={()=>setToggleMenu(false)}   
                      className = ""/>
                     </li>
-                    {["Market","Exchange","Tutorials","Wallets"].map((item,index)=>(
+                    {["Market","Transactions","Tutorials","About"].map((item,index)=>(
                 <NavbarItem key = {item+index} title ={item}  classProps = "my-2 text-lg"/>
              ))}
                 </ul>
