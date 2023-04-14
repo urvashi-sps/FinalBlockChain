@@ -95,18 +95,12 @@ class App extends Component {
     <div className= "min-h-screen">
     <div className="gradient-bg-welcome">
      <Navbar/>
-      <Welcome accountNumber = {this.state.account} createProduct={this.createProduct} /> 
+      <Welcome accountNumber = {this.state.account} createProduct={this.createProduct}  /> 
     </div>
     <Services/>
-     {/* <Transactions/> */}
+     <Transactions purchaseProduct={this.purchaseProduct} products={this.state.products}/>
      <Footer/>
    </div>
-        <main role="main" className="col-lg-12 d-flex">
-  { this.state.loading
-    ? <div id="loader" className="text-center"><p className="text-center">Loading...</p></div>
-    : <Main products={this.state.products} createProduct={this.createProduct} purchaseProduct={this.purchaseProduct}/>
-  }
-</main>
       </div>
     );
   }
