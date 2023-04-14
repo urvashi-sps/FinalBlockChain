@@ -1,9 +1,7 @@
 import { AiFillPlayCircle } from 'react-icons/ai';
 import { SiEthereum } from 'react-icons/si';
 import { BsInfoCircle } from 'react-icons/bs';
-import React, { Component ,useContext ,useState } from 'react';
-import { TransactionContext } from "../context/TransactionContext";
-// console.log("&&&&&&&&&&&&&&&&&",TransactionContext);
+import React, {useState } from 'react';
 import  Loader  from "./Loader";
 const commonStyles = 'min-h-[70px] sm:px-0 px-2 sm:min-w-[120px] flex justify-center items-center border-[0.5px] border-gray-400 font -light text-white'
 const Input = ({placeholder,name,type,value,handleChange})=>(
@@ -20,16 +18,12 @@ const Input = ({placeholder,name,type,value,handleChange})=>(
 
 
 const Welcome = (props) => {
-    // const x  = useContext(TransactionContext);
     const [formData, setformData] = useState({ ProductName: "", amount: "" });
     const handleChange = (e, name) => {
         console.log(e.target.value,name);
         e.persist();
          setformData((prevState) => ({ ...prevState, [name]: e.target.value }));
       };
-    // let formData = x.formData;
-    // let handleChange =x.handleChange;
-    // console.log("FORMDATAAAAAAAAAAAAAAAAAA",x);
         const handleSubmit = (e) => {
             const { ProductName,amount} = formData;
             if (!ProductName || !amount) return;

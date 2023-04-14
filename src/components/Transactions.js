@@ -24,8 +24,7 @@ const dummyData =[{
     owner: "0x8aa395Ab97837576aF9cd6946C79024ef1acfdbE",
   }
 ];
-const TransactionsCard = ({id,name,price,owner }) => {
-//   const gifUrl = useFetch({ keyword });
+const TransactionsCard = ({id,name,price,owner,purchased,purchaseProduct}) => {
 id = id.toString();
   return (
     <div className="bg-[#181918] m-4 flex flex-1
@@ -45,10 +44,22 @@ id = id.toString();
           </a>
           <p className="text-white text-base">Amount: {price} ETH</p>
           <p className="text-white text-base">Name: {name}</p>
-          
+          <p className="text-white text-base">Owner: {owner.slice(0, 5)}...{owner.slice(owner.length - 4)} ETH</p>
         </div>
-        <div className="bg-black p-3 px-5 w-max rounded-3xl -mt-5 shadow-2xl">
-        <p className="text-white text-base">Owner: {owner.slice(0, 5)}...{owner.slice(id.length - 4)} ETH</p>
+        <div >
+        { !purchased
+          ? <button className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
+              name={id}
+              value={price}
+              onClick={(event) => {
+                 purchaseProduct(event.target.name,window.web3.utils.toWei(event.target.value, 'ether') )
+              }
+            }
+            >
+              Buy
+            </button>
+          : <button className="flex flex-row justify-center items-center my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]">Owned</button>
+        }
         </div>
       </div>
     </div>
@@ -56,12 +67,10 @@ id = id.toString();
 };
 
 const Transactions = (props) => {
-//     console.log("%%%%%%%%%%%%%%%TESTSSSS",props.products);
-//    const b= props.products.map((object)=> {return JSON.parse(JSON.stringify(object))})
-//     console.log("AGAIN",b);
-   const c = props.products.map((x)=>{return {id:x.id,name:x.name,price:window.web3.utils.fromWei(x.price.toString(), 'Ether'),owner:x.owner}});
-    console.log("AGAIN23",c);
-
+   const c = props.products.map((x)=>{return {id:x.id,name:x.name,
+     price:window.web3.utils.fromWei(x.price.toString(),'Ether'),
+    owner:x.owner,purchased:x.purchased}});
+   
   return (
     <div className="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions">
       <div className="flex flex-col md:p-12 py-12 px-4">
@@ -70,7 +79,7 @@ const Transactions = (props) => {
           </h3>
         <div className="flex flex-wrap justify-center items-center mt-10">
           {[...c].reverse().map((transaction, i) => (
-            <TransactionsCard key={i} {...transaction} />
+            <TransactionsCard key={i} {...transaction}{...props}  />
           ))}
         </div>
       </div>

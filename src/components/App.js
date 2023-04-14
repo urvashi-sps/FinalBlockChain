@@ -101,7 +101,9 @@ class App extends Component {
      <Transactions purchaseProduct={this.purchaseProduct} products={this.state.products}/>
      <Footer/>
    </div>
+   
       </div>
+       
     );
   }
 }
