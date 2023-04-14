@@ -18,6 +18,7 @@ const Input = ({placeholder,name,type,value,handleChange})=>(
 
 
 const Welcome = (props) => {
+    console.log("MUSTSSSSSSSSSSSSSSS",props);
     const [formData, setformData] = useState({ ProductName: "", amount: "" });
     const handleChange = (e, name) => {
         console.log(e.target.value,name);
@@ -31,7 +32,7 @@ const Welcome = (props) => {
             e.preventDefault();
             props.createProduct(ProductName, price)
           };
-
+          const [isLoading, setIsLoading] = useState(false);
     
     return (
         <div className="flex w-full justify-center items-center">
@@ -94,14 +95,10 @@ const Welcome = (props) => {
                 {/* <Input placeholder="Keyword(Gif)" name ="keyword" type= "text" handleChange ={()=>{}}/>
                 <Input placeholder="Enter message" name ="message" type= "text" handleChange ={()=>{}}/> */}
                 <div className='h-[1px] w-full bg-gray-400 my-2'/>
-                <button
+                {props.loading?(<Loader/>):(<button
                 type = "button"
                 onClick ={handleSubmit}
-                className = "text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer">Add Product</button>
-                {true?(<Loader/>):(<button
-                type = "button"
-                onClick ={handleSubmit}
-                className = "text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer">Send Now</button>)}
+                className = "text-white w-full mt-2 border-[1px] p-2 border-[#3d4f7c] rounded-full cursor-pointer">Add Product</button>)}
                 </div>
                 </div>
             </div>

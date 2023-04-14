@@ -39,7 +39,6 @@ id = id.toString();
         <div className="display-flex justify-start w-full mb-6 p-2">
           <a href="www.google.com" target="_blank" rel="noreferrer">
             <p className="text-white text-base">Id: {id}</p>
-            {/* <p className="text-white text-base">From: {id}</p> */}
 
           </a>
           <p className="text-white text-base">Amount: {price} ETH</p>

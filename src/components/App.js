@@ -72,12 +72,15 @@ class App extends Component {
         this.purchaseProduct = this.purchaseProduct.bind(this);
    }
    
-   createProduct(name, price) {
+   async createProduct(name, price) {
     this.setState({ loading: true })
-    this.state.marketplace.methods.createProduct(name, price).send({ from: this.state.account })
+     this.state.marketplace.methods.createProduct(name, price).send({ from: this.state.account})
     .once('receipt', (receipt) => {
       this.setState({ loading: false })
     })
+    const delay = ms => new Promise(res => setTimeout(res, ms));
+    await delay(10000);
+    window.location.reload();
   }
 
   purchaseProduct(id, price) {
@@ -95,13 +98,12 @@ class App extends Component {
     <div className= "min-h-screen">
     <div className="gradient-bg-welcome">
      <Navbar/>
-      <Welcome accountNumber = {this.state.account} createProduct={this.createProduct}  /> 
+      <Welcome accountNumber = {this.state.account} createProduct={this.createProduct} loading={this.state.loading}  /> 
     </div>
     <Services/>
      <Transactions purchaseProduct={this.purchaseProduct} products={this.state.products}/>
      <Footer/>
    </div>
-   
       </div>
        
     );
