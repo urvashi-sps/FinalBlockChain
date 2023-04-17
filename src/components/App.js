@@ -14,9 +14,11 @@ import {AiOutlineClose} from 'react-icons/ai';
 import React, {Component} from "react";
 import logo from '../images/logo.png';
 import { useState } from 'react';
+import gifURL from '../utils/fetchGIF';
 class App extends Component {
 
   async componentWillMount() {
+;
     await this.loadWeb3();
     await this.loadBlockChainData();
   }
@@ -85,7 +87,8 @@ class App extends Component {
       productCount: 0,
       products: [],
       loading: true,
-      connected: true
+      connected: true,
+      image:" "
     }
     this.createProduct = this.createProduct.bind(this);
     this.purchaseProduct = this.purchaseProduct.bind(this);
@@ -114,6 +117,11 @@ class App extends Component {
   // }
 
   async createProduct(name, price) {
+    const keyword ="TEST";
+    const gifUrl = await gifURL({keyword});
+    console.log("THIS IS WHAT U WANT",gifUrl)
+    this.setState({image:gifURL})
+    console.log("HERE U ARE",this.state.image)
     this.setState({ loading: true })
     this.state.marketplace.methods.createProduct(name, price).send({ from: this.state.account })
       .once('error', (e) => {
@@ -155,8 +163,14 @@ class App extends Component {
   }
 
   render() {
+    
     return (
       <Router>
+           <img
+          src={this.state.image}
+          alt="nature"
+          className="w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover"
+        />
       <div className="App">
       <div className="gradient-bg-welcome">
        <nav className='w-full flex md: justify-center justify-between items-center p-4'>
@@ -175,6 +189,7 @@ class App extends Component {
          <div className='flex relative'>
          <AiOutlineClose fontSize={108} className ="text-white md:hidden cursor-pointer"/>
          <HiMenuAlt4 fontSize={108} className ="text-white md:hidden cursor-pointer"/>
+        
          </div>
        </nav>
        </div>

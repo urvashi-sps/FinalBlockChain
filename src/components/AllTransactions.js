@@ -53,7 +53,7 @@ const AllTransactions = (props) => {
         {props.products.length==0?(<h1 className="text-white text-3xl text-center my-2 min-h-screen">No products found!</h1>):(<div><h3 className="text-white text-3xl text-center my-2">
             All Transactions
           </h3>
-          <div className="flex flex-wrap justify-center items-center mt-10">
+          <div className="flex flex-wrap justify-center items-center mt--10 min-h-screen">
           {[...c].reverse().map((transaction, i) => (
             <TransactionsCard key={i} {...transaction}{...props}  />
           ))}
