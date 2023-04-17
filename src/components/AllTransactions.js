@@ -40,27 +40,27 @@ id = id.toString();
   );
 };
 
-const Transactions = (props) => {
+const AllTransactions = (props) => {
+    console.log(props.products);
    let c = props.products.map((x)=>{return {id:x.id,name:x.name,
      price:window.web3.utils.fromWei(x.price.toString(),'Ether'),
     owner:x.owner,purchased:x.purchased}});
-     c= c.slice(-3);
-   
+    console.log("$$$$$$$$",c.length);
+//    let c= [];
   return (
     <div className="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions">
       <div className="flex flex-col md:p-12 py-12 px-4">
-      {props.products.length==0?<h1 className="text-white text-3xl text-center my-2">No products found!</h1>:(<div><h3 className="text-white text-3xl text-center my-2">
-            Latest Transactions
+        {props.products.length==0?(<h1 className="text-white text-3xl text-center my-2 min-h-screen">No products found!</h1>):(<div><h3 className="text-white text-3xl text-center my-2">
+            All Transactions
           </h3>
-        <div className="flex flex-wrap justify-center items-center mt-10">
+          <div className="flex flex-wrap justify-center items-center mt-10">
           {[...c].reverse().map((transaction, i) => (
             <TransactionsCard key={i} {...transaction}{...props}  />
           ))}
-        </div>
-        </div>)}
+        </div></div>)}
       </div>
     </div>
   );
 };
 
-export default Transactions;
+export default AllTransactions;
