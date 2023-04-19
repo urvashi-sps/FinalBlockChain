@@ -570,12 +570,20 @@ video {
   margin-bottom: 1.25rem;
 }
 
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
+
 .mb-6 {
   margin-bottom: 1.5rem;
 }
 
 .ml-5 {
   margin-left: 1.25rem;
+}
+
+.-mt-10 {
+  margin-top: -2.5rem;
 }
 
 .mt-1 {
@@ -713,6 +721,10 @@ video {
 
 .cursor-pointer {
   cursor: pointer;
+}
+
+.resize {
+  resize: both;
 }
 
 .list-none {
@@ -1065,6 +1077,10 @@ video {
 }
 
 @media (min-width: 768px) {
+
+  .md\:ml-40 {
+    margin-left: 10rem;
+  }
 
   .md\:mr-10 {
     margin-right: 2.5rem;

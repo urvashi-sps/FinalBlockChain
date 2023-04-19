@@ -48,12 +48,12 @@ const AllTransactions = (props) => {
     console.log("$$$$$$$$",c.length);
 //    let c= [];
   return (
-    <div className="flex w-full justify-center items-center 2xl:px-20 gradient-bg-transactions">
+    <div className="flex w-full justify-center 2xl:px-20 gradient-bg-transactions min-h-screen">
       <div className="flex flex-col md:p-12 py-12 px-4">
-        {props.products.length==0?(<h1 className="text-white text-3xl text-center my-2 min-h-screen">No products found!</h1>):(<div><h3 className="text-white text-3xl text-center my-2">
+        {props.products.length==0?(<h1 className="text-white text-3xl mb-10 items-top text-center my-2 min-h-screen">No products found!</h1>):(<div><h3 className="text-white text-3xl mb-10 text-center my-2">
             All Transactions
           </h3>
-          <div className="flex flex-wrap justify-center items-center mt--10 min-h-screen">
+          <div className="flex flex-wrap justify-center items-center mt--10 ">
           {[...c].reverse().map((transaction, i) => (
             <TransactionsCard key={i} {...transaction}{...props}  />
           ))}

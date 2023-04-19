@@ -9,6 +9,7 @@ import {
 } from 'react-router-dom';
 import Home from'./Home.js';
 import AllTransactions from './AllTransactions';
+import About from './About';
 import {HiMenuAlt4} from 'react-icons/hi';
 import {AiOutlineClose} from 'react-icons/ai';
 import React, {Component} from "react";
@@ -18,7 +19,6 @@ import gifURL from '../utils/fetchGIF';
 class App extends Component {
 
   async componentWillMount() {
-;
     await this.loadWeb3();
     await this.loadBlockChainData();
   }
@@ -106,16 +106,6 @@ class App extends Component {
     this.loadBlockChainData()
   }
 
-  //  async createProduct(name, price) {
-  //   this.setState({ loading: true })
-  //    this.state.marketplace.methods.createProduct(name, price).send({ from: this.state.account})
-  //   .once('transactionhash', (transactionhash) => {
-  //     console.log("***********************",transactionhash)
-  //     this.setState({ loading: false })
-  //   })
-  //  this.refresh();
-  // }
-
   async createProduct(name, price) {
     const keyword ="TEST";
     const gifUrl = await gifURL({keyword});
@@ -137,17 +127,6 @@ class App extends Component {
       })
   }
 
-
-  // purchaseProduct(id, price) {
-  //   this.setState({ loading: true })
-  //   this.state.marketplace.methods.purchaseProduct(id).send({ from: this.state.account, value: price })
-  //   .once('receipt', (receipt) => {
-  //     console.log("receipt",receipt);
-  //     this.setState({ loading: false })
-  //   })
-  //   this.refresh();
-  // }
-
   purchaseProduct(id, price) {
     this.setState({ loading: true })
     this.state.marketplace.methods.purchaseProduct(id).send({ from: this.state.account, value: price })
@@ -166,11 +145,7 @@ class App extends Component {
     
     return (
       <Router>
-           <img
-          src={this.state.image}
-          alt="nature"
-          className="w-full h-64 2xl:h-96 rounded-md shadow-lg object-cover"
-        />
+          
       <div className="App">
       <div className="gradient-bg-welcome">
        <nav className='w-full flex md: justify-center justify-between items-center p-4'>
@@ -179,12 +154,21 @@ class App extends Component {
          </div>
          <ul className='text-white md:flex hidden list-none flex-row justify-between items-center flex-initial'>
          <Link className={`mx-4 cursor-pointer`} to="/">Home</Link>
-         <Link className={`mx-4 cursor-pointer`} to={{ pathname: "https://herewecode.io/" }} target="_blank">Market</Link>
+         <a
+         className={`mx-4 cursor-pointer`}
+          // class='social-icon-link github'
+          href="https://in.tradingview.com/symbols/ETHUSD/"
+          target='_blank'
+          rel="noopener"
+        >
+        Market
+        </a>
+         {/* <Link className={`mx-4 cursor-pointer`} to={{ pathname: "https://herewecode.io/" }} target="_blank">Market</Link> */}
          <Link className={`mx-4 cursor-pointer`} to="/transactions">Products</Link>
          <Link className={`mx-4 cursor-pointer`} to="/about">About Us</Link>
-             <li className='bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]'>
+             {/* <li className='bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]'>
                 Login
-             </li>
+             </li> */}
          </ul>
          <div className='flex relative'>
          <AiOutlineClose fontSize={108} className ="text-white md:hidden cursor-pointer"/>
@@ -197,20 +181,9 @@ class App extends Component {
 <Routes>
 <Route exact path='/' element={<Home accountNumber={this.state.account} createProduct={this.createProduct} loading={this.state.loading} connectWallet={this.connectWallet} connected={this.state.connected} purchaseProduct={this.purchaseProduct} products={this.state.products}/>}></Route>
 <Route exact path='/transactions' element={<AllTransactions connected={this.state.connected} purchaseProduct={this.purchaseProduct} products={this.state.products}/>}></Route>
+<Route exact path='/about' element={<About/>}></Route>
 </Routes>
 </Router>
-      // <div>
-      //   <div className="min-h-screen">
-      //     <div className="gradient-bg-welcome">
-      //       <Navbar />
-      //       <Welcome accountNumber={this.state.account} createProduct={this.createProduct} loading={this.state.loading} connectWallet={this.connectWallet} connected={this.state.connected} />
-      //     </div>
-      //     <Services />
-      //     {this.state.connected ? <Transactions purchaseProduct={this.purchaseProduct} products={this.state.products} /> : null}
-
-      //     <Footer />
-      //   </div>
-      // </div>
 
     );
   }
