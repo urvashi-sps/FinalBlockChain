@@ -7,15 +7,14 @@ import {
   Route,
   Link
 } from 'react-router-dom';
-import Home from'./Home.js';
+import Home from './Home.js';
 import AllTransactions from './AllTransactions';
 import About from './About';
-import {HiMenuAlt4} from 'react-icons/hi';
-import {AiOutlineClose} from 'react-icons/ai';
-import React, {Component} from "react";
+import { HiMenuAlt4 } from 'react-icons/hi';
+import { AiOutlineClose } from 'react-icons/ai';
+import React, { Component } from "react";
 import logo from '../images/logo.png';
 import { useState } from 'react';
-import gifURL from '../utils/fetchGIF';
 class App extends Component {
 
   async componentWillMount() {
@@ -49,9 +48,9 @@ class App extends Component {
       this.setState({ marketplace });
       console.log("marketplace", marketplace)
       let productCount = await marketplace.methods.productCount().call()
-      
-      if(!productCount){
-        productCount=0;
+
+      if (!productCount) {
+        productCount = 0;
       }
 
       console.log(productCount.toString());
@@ -63,15 +62,15 @@ class App extends Component {
       //     products: [...this.state.products, product]
       //   })
       // }
-            // Load products
-    let addedProducts = []
-    for (var i = 1; i <= productCount; i++) {
-      const product = await marketplace.methods.products(i).call()
-      addedProducts.push(product)
-    }
-    this.setState({
-      products: [...addedProducts]
-    })
+      // Load products
+      let addedProducts = []
+      for (var i = 1; i <= productCount; i++) {
+        const product = await marketplace.methods.products(i).call()
+        addedProducts.push(product)
+      }
+      this.setState({
+        products: [...addedProducts]
+      })
       console.log(this.state.products);
       this.setState({ loading: false })
     }
@@ -87,8 +86,7 @@ class App extends Component {
       productCount: 0,
       products: [],
       loading: true,
-      connected: true,
-      image:" "
+      connected: true
     }
     this.createProduct = this.createProduct.bind(this);
     this.purchaseProduct = this.purchaseProduct.bind(this);
@@ -107,15 +105,9 @@ class App extends Component {
   }
 
   async createProduct(name, price) {
-    const keyword ="TEST";
-    const gifUrl = await gifURL({keyword});
-    console.log("THIS IS WHAT U WANT",gifUrl)
-    this.setState({image:gifURL})
-    console.log("HERE U ARE",this.state.image)
     this.setState({ loading: true })
     this.state.marketplace.methods.createProduct(name, price).send({ from: this.state.account })
       .once('error', (e) => {
-        console.log("here,93")
         this.setState({ loading: false })
         this.refresh()
       })
@@ -123,7 +115,6 @@ class App extends Component {
         this.setState({ loading: false })
         this.refresh();
         window.location.reload();
-
       })
   }
 
@@ -142,48 +133,43 @@ class App extends Component {
   }
 
   render() {
-    
+
     return (
       <Router>
-          
-      <div className="App">
-      <div className="gradient-bg-welcome">
-       <nav className='w-full flex md: justify-center justify-between items-center p-4'>
-         <div className='md: flex-[0.5] flex-initial justify-center items-center'>
-         <img src ={logo} alt ="logo" className="w-32 cursor-pointer "/>
-         </div>
-         <ul className='text-white md:flex hidden list-none flex-row justify-between items-center flex-initial'>
-         <Link className={`mx-4 cursor-pointer`} to="/">Home</Link>
-         <a
-         className={`mx-4 cursor-pointer`}
-          // class='social-icon-link github'
-          href="https://in.tradingview.com/symbols/ETHUSD/"
-          target='_blank'
-          rel="noopener"
-        >
-        Market
-        </a>
-         {/* <Link className={`mx-4 cursor-pointer`} to={{ pathname: "https://herewecode.io/" }} target="_blank">Market</Link> */}
-         <Link className={`mx-4 cursor-pointer`} to="/transactions">Products</Link>
-         <Link className={`mx-4 cursor-pointer`} to="/about">About Us</Link>
-             {/* <li className='bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]'>
-                Login
-             </li> */}
-         </ul>
-         <div className='flex relative'>
-         <AiOutlineClose fontSize={108} className ="text-white md:hidden cursor-pointer"/>
-         <HiMenuAlt4 fontSize={108} className ="text-white md:hidden cursor-pointer"/>
-        
-         </div>
-       </nav>
-       </div>
-       </div>
-<Routes>
-<Route exact path='/' element={<Home accountNumber={this.state.account} createProduct={this.createProduct} loading={this.state.loading} connectWallet={this.connectWallet} connected={this.state.connected} purchaseProduct={this.purchaseProduct} products={this.state.products}/>}></Route>
-<Route exact path='/transactions' element={<AllTransactions connected={this.state.connected} purchaseProduct={this.purchaseProduct} products={this.state.products}/>}></Route>
-<Route exact path='/about' element={<About/>}></Route>
-</Routes>
-</Router>
+        <div className="App">
+          <div className="gradient-bg-welcome">
+            <nav className='w-full flex md: justify-center justify-between items-center p-4'>
+              <div className='md: flex-[0.5] flex-initial justify-center items-center'>
+                <img src={logo} alt="logo" className="w-32 cursor-pointer " />
+              </div>
+              <ul className='text-white md:flex hidden list-none flex-row justify-between items-center flex-initial'>
+                <Link className={`mx-4 cursor-pointer`} to="/">Home</Link>
+                <a
+                  className={`mx-4 cursor-pointer`}
+                  href="https://in.tradingview.com/symbols/ETHUSD/"
+                  target='_blank'
+                  rel="noopener"
+                >
+                  Market
+                </a>
+                <Link className={`mx-4 cursor-pointer`} to="/transactions">Products</Link>
+                <Link className={`mx-4 cursor-pointer`} to="/about">About Us</Link>
+                <a className= 'bg-[#2952e3] py-2 px-7 mx-4 rounded-full cursor-pointer hover:bg-[#2546bd]' href="mailto:urvashi_suden@softprodigy.com">Contact Us</a>
+              </ul>
+              <div className='flex relative'>
+                <AiOutlineClose fontSize={108} className="text-white md:hidden cursor-pointer" />
+                <HiMenuAlt4 fontSize={108} className="text-white md:hidden cursor-pointer" />
+
+              </div>
+            </nav>
+          </div>
+        </div>
+        <Routes>
+          <Route exact path='/' element={<Home accountNumber={this.state.account} createProduct={this.createProduct} loading={this.state.loading} connectWallet={this.connectWallet} connected={this.state.connected} purchaseProduct={this.purchaseProduct} products={this.state.products} />}></Route>
+          <Route exact path='/transactions' element={<AllTransactions connected={this.state.connected} purchaseProduct={this.purchaseProduct} products={this.state.products} />}></Route>
+          <Route exact path='/about' element={<About />}></Route>
+        </Routes>
+      </Router>
 
     );
   }

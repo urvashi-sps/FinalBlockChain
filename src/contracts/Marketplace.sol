@@ -30,7 +30,7 @@ contract Marketplace{
 );
 
   constructor() public{
-    name = "DApp Marketplace";
+    name = "Rectify Marketplace";
   }
 
   function createProduct(string memory _name, uint _price)public{
