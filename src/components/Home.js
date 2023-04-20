@@ -1,7 +1,6 @@
 import React from "react";
 import Footer from './Footer.js';
 import Welcome from './Welcome.js'
-import Loader from './Loader.js';
 import Services from './Services.js';
 import Transactions from './Transactions.js'
 const Home=(props)=>{

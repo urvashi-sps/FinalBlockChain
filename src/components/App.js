@@ -14,7 +14,7 @@ import { HiMenuAlt4 } from 'react-icons/hi';
 import { AiOutlineClose } from 'react-icons/ai';
 import React, { Component } from "react";
 import logo from '../images/logo.png';
-import { useState } from 'react';
+
 class App extends Component {
 
   async componentWillMount() {
@@ -40,9 +40,7 @@ class App extends Component {
     const accounts = await web3.eth.getAccounts()
     this.setState({ account: accounts[0] })
     const networkId = await web3.eth.net.getId();
-    console.log("Network Id", networkId);
     const networkData = Marketplace.networks[networkId];
-    console.log("NETWORK DATA", networkData);
     if (networkData) {
       const marketplace = web3.eth.Contract(Marketplace.abi, networkData.address)
       this.setState({ marketplace });
@@ -52,17 +50,7 @@ class App extends Component {
       if (!productCount) {
         productCount = 0;
       }
-
-      console.log(productCount.toString());
       this.setState({ productCount });
-      // // Load products
-      // for (var i = 1; i <= productCount; i++) {
-      //   const product = await marketplace.methods.products(i).call()
-      //   this.setState({
-      //     products: [...this.state.products, product]
-      //   })
-      // }
-      // Load products
       let addedProducts = []
       for (var i = 1; i <= productCount; i++) {
         const product = await marketplace.methods.products(i).call()
@@ -71,7 +59,6 @@ class App extends Component {
       this.setState({
         products: [...addedProducts]
       })
-      console.log(this.state.products);
       this.setState({ loading: false })
     }
     else {

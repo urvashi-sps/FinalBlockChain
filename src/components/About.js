@@ -1,6 +1,5 @@
 import React from 'react';
 const About = () => (
-    // md: p-20 py-12 px-4  justify-center justify-between
                 <div className='md:flex-row flex-col items-start justify-between flex w-full  items-top gradient-bg-welcome min-h-screen md: p-20 py-12 px-4  justify-center justify-between '>
                     <div className='flex flex-1 flex-col md:ml-40'>
                         <h1 className='text-3xl sm:text-5xl text-white text-gradient py-1'>
