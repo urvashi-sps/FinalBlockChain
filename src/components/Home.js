@@ -11,7 +11,7 @@ const Home=(props)=>{
             <Welcome accountNumber={props.accountNumber} createProduct={props.createProduct} loading={props.loading} connectWallet={props.connectWallet} connected={props.connected} />
           </div>
           <Services />
-          {props.connected ? <Transactions purchaseProduct={props.purchaseProduct} products={props.products} /> : null}
+          {props.connected ? <Transactions purchaseProduct={props.purchaseProduct} products={props.products} accountNumber={props.accountNumber}/> : null}
 
           <Footer />
         </div>

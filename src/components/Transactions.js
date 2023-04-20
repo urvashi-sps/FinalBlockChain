@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import useFetch from '../utils/fetchGIF';
 
-const TransactionsCard =  ({id,name,price,owner,purchased,purchaseProduct}) => {
+const TransactionsCard =  ({id,name,price,owner,purchased,purchaseProduct,accountNumber}) => {
 id = id.toString();
 let gifUrl = useFetch({name});
 if(!gifUrl)
@@ -30,19 +30,22 @@ gifUrl= "https://giphy.com/gifs/nehumanesociety-dog-space-keyboard-jkZtSdwKOx05B
       <div className="bg-black p-3 px-5 w-max rounded-3xl -mt-5 shadow-2xl items-center mx-auto">
         <p className="text-[#37c7da] font-bold text-center">{price} ETH</p>
       </div>
-      { !purchased
-        ? <button className="flex flex-row justify-center items-center my-5 mx-auto bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
-            name={id}
-            value={price}
-            onClick={(event) => {
-               purchaseProduct(event.target.name,window.web3.utils.toWei(event.target.value, 'ether') )
+      { 
+        (accountNumber == owner) 
+        ? <button className="flex flex-row justify-center items-center mx-auto my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]">Owned!</button>
+        :!purchased 
+          ? <button className="flex flex-row justify-center items-center my-5 mx-auto bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]"
+              name={id}
+              value={price}
+              onClick={(event) => {
+                 purchaseProduct(event.target.name,window.web3.utils.toWei(event.target.value, 'ether') )
+              }
             }
-          }
-          >
-            Buy
-          </button>
-        : <button className="flex flex-row justify-center items-center mx-auto my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]">Sold Out!</button>
-      }
+            >
+              Buy
+            </button>
+          :<button className="flex flex-row justify-center items-center mx-auto my-5 bg-[#2952e3] p-3 rounded-full cursor-pointer hover:bg-[#2546bd]">Sold Out!</button>
+        }
       </div>
     </div>
   </div>

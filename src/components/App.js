@@ -153,7 +153,7 @@ class App extends Component {
         </div>
         <Routes>
           <Route exact path='/' element={<Home accountNumber={this.state.account} createProduct={this.createProduct} loading={this.state.loading} connectWallet={this.connectWallet} connected={this.state.connected} purchaseProduct={this.purchaseProduct} products={this.state.products} />}></Route>
-          <Route exact path='/transactions' element={<AllTransactions connected={this.state.connected} purchaseProduct={this.purchaseProduct} products={this.state.products} />}></Route>
+          <Route exact path='/transactions' element={<AllTransactions connected={this.state.connected} purchaseProduct={this.purchaseProduct} products={this.state.products} accountNumber={this.state.account}  />}></Route>
           <Route exact path='/about' element={<About />}></Route>
         </Routes>
       </Router>
